@@ -1,18 +1,21 @@
 /* Import Google Fonts (Jika Anda ingin langsung di CSS, alternatif dari HTML) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
-/* Variabel CSS untuk Warna (Memudahkan perubahan tema) */
+/* Variabel CSS untuk Warna (Direvisi untuk Biru Chelsea & Kesan Dalam) */
 :root {
-    --primary-color: #6a05ad; /* Ungu */
-    --secondary-color: #00bcd4; /* Cyan */
-    --accent-color: #ff9800; /* Oranye */
-    --text-color: #333;
-    --light-text-color: #f8f8f8;
-    --background-color: #ffffff;
-    --light-background-color: #f4f7f6;
-    --border-color: #e0e0e0;
-    --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
-    --shadow-medium: 0 8px 24px rgba(0,0,0,0.12);
+    --chelsea-blue: #153D8A;           /* Warna Biru Chelsea F.C. */
+    --primary-color: var(--chelsea-blue); /* Gunakan Chelsea Blue sebagai warna utama */
+    --secondary-color: #00bcd4;        /* Cyan (tetap cerah untuk aksen sekunder) */
+    --accent-color: #e74c3c;           /* Muted Red (tetap sama) */
+
+    --dark-bg-color: #1a2a3a;          /* Latar Belakang Gelap (lebih tua dari biru Chelsea) */
+    --light-card-color: #2c3e50;       /* Warna kartu terang (biru gelap sedang) */
+    --text-on-dark: #ecf0f1;           /* Teks terang untuk latar gelap */
+    --text-on-light: #34495e;          /* Teks gelap untuk latar terang (ini jarang) */
+
+    --border-color: rgba(255, 255, 255, 0.1); /* Border tipis untuk elemen gelap */
+    --shadow-light: 0 4px 15px rgba(0,0,0,0.2);  /* Bayangan lebih tegas untuk elemen gelap */
+    --shadow-medium: 0 8px 25px rgba(0,0,0,0.3); /* Bayangan sangat tegas */
 }
 
 /* Reset CSS (Agar tampilan konsisten di berbagai browser) */
@@ -25,9 +28,9 @@
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--light-background-color);
-    scroll-behavior: smooth; /* Untuk smooth scrolling */
+    color: var(--text-on-dark); /* Teks dasar jadi terang karena background gelap */
+    background-color: var(--dark-bg-color); /* Latar belakang body utama jadi gelap */
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -36,16 +39,16 @@ body {
     padding: 0 20px;
 }
 
-/* Header/Hero Section */
+/* Header/Hero Section - Warna latar belakang biru Chelsea */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--light-text-color);
+    background: var(--chelsea-blue); /* Biru Chelsea solid */
+    color: var(--text-on-dark); /* Teks di hero section terang */
     text-align: center;
     padding: 100px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Agar memenuhi tinggi viewport */
+    min-height: 100vh;
 }
 
 .hero h1 {
@@ -77,13 +80,11 @@ body {
 
 .primary-btn {
     background-color: var(--accent-color);
-    color: var(--light-text-color);
+    color: var(--text-on-dark);
 }
 
 .primary-btn:hover {
-    /* darken() adalah fungsi SASS/LESS, bukan CSS murni.
-       Gunakan warna hex yang sedikit lebih gelap sebagai alternatif. */
-    background-color: #e68a00; /* Sedikit lebih gelap dari #ff9800 */
+    background-color: #d63d2e; /* Sedikit lebih gelap dari accent-color */
     transform: translateY(-3px);
     box-shadow: var(--shadow-medium);
 }
@@ -96,7 +97,7 @@ body {
 
 .secondary-btn:hover {
     background-color: var(--secondary-color);
-    color: var(--light-text-color);
+    color: var(--text-on-dark);
     transform: translateY(-3px);
     box-shadow: var(--shadow-light);
 }
@@ -104,12 +105,13 @@ body {
 /* Section Styling */
 .section {
     padding: 80px 0;
-    background-color: var(--background-color);
+    background-color: var(--dark-bg-color); /* Latar belakang section jadi gelap juga */
     border-bottom: 1px solid var(--border-color);
+    color: var(--text-on-dark); /* Teks di section jadi terang */
 }
 
-.section:nth-child(even) { /* Latar belakang berbeda untuk section genap */
-    background-color: var(--light-background-color);
+.section:nth-child(even) { /* Latar belakang berbeda untuk section genap (opsional) */
+    background-color: var(--secondary-color); /* Bisa pakai warna secondary atau variasi dark_bg_color */
 }
 
 .section h2 {
@@ -117,7 +119,7 @@ body {
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 50px;
-    color: var(--primary-color);
+    color: var(--accent-color); /* Judul section pakai accent color agar menonjol */
     position: relative;
 }
 
@@ -145,7 +147,7 @@ body {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid var(--primary-color);
+    border: 5px solid var(--accent-color); /* Border foto profil pakai accent-color */
     box-shadow: var(--shadow-medium);
 }
 
@@ -153,6 +155,7 @@ body {
     max-width: 700px;
     font-size: 1.1em;
     line-height: 1.8;
+    color: var(--text-on-dark); /* Teks di about me terang */
 }
 
 /* Experience Section (Timeline) */
@@ -160,7 +163,7 @@ body {
     position: relative;
     max-width: 900px;
     margin: 0 auto;
-    padding-left: 20px; /* Ruang untuk garis timeline */
+    padding-left: 20px;
 }
 
 .timeline::before { /* Garis vertikal timeline */
@@ -169,18 +172,19 @@ body {
     top: 0;
     left: 0;
     width: 4px;
-    background-color: var(--border-color);
+    background-color: var(--border-color); /* Garis timeline pakai border color */
     height: 100%;
 }
 
 .timeline-item {
     margin-bottom: 40px;
     position: relative;
-    background-color: var(--background-color);
+    background-color: var(--light-card-color); /* Latar belakang kartu timeline item lebih gelap */
+    color: var(--text-on-dark); /* Teks di kartu timeline terang */
     padding: 25px;
     border-radius: 8px;
-    box-shadow: var(--shadow-light);
-    margin-left: 30px; /* Offset dari garis timeline */
+    box-shadow: var(--shadow-medium); /* Bayangan lebih tegas */
+    margin-left: 30px;
 }
 
 .timeline-item::before { /* Lingkaran di garis timeline */
@@ -188,49 +192,42 @@ body {
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: var(--primary-color);
+    background-color: var(--accent-color); /* Lingkaran timeline pakai accent-color */
     border-radius: 50%;
-    left: -38px; /* Posisi di garis */
+    left: -38px;
     top: 30px;
-    border: 3px solid var(--accent-color);
+    border: 3px solid var(--text-on-dark); /* Border lingkaran pakai text-on-dark */
 }
 
-/* --- KODE BARU / DIPINDAHKAN UNTUK UKURAN LOGO DAN LAYOUT JUDUL --- */
 .experience-title-wrapper {
-    display: flex;       /* Membuat logo dan h3 sejajar */
-    align-items: center; /* Menyelaraskan secara vertikal di tengah */
-    gap: 15px;           /* Memberi jarak antara logo dan h3 */
-    /* margin-bottom: 10px; Dihapus karena ada h3 margin-bottom di bawah */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .company-logo {
-    width: 40px;  /* UKURAN LOGO DEFAULT UNTUK LAYAR LEBAR */
-    height: auto; /* Mempertahankan rasio aspek gambar */
+    width: 40px;
+    height: auto;
 }
 
-/* Penting: Hapus margin default dari h3 di dalam experience-title-wrapper */
 .experience-title-wrapper h3 {
-    margin: 0; /* Menghapus margin atas dan bawah default dari h3 */
-    font-size: 1.4em; /* Mengatur kembali font-size yang mungkin tertimpa */
-    color: var(--primary-color); /* Mengatur kembali warna yang mungkin tertimpa */
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--text-on-dark); /* Judul pengalaman terang */
 }
-/* --- AKHIR KODE BARU / DIPINDAHKAN --- */
 
 .timeline-item h3 {
-    /* Aturan ini sekarang ditimpa oleh .experience-title-wrapper h3 di atas */
-    /* font-size: 1.4em; */
-    /* color: var(--primary-color); */
-    margin-bottom: 5px; /* Tetap pertahankan margin-bottom untuk jarak ke period */
+    margin-bottom: 5px;
 }
 
 .timeline-item .period {
     font-size: 0.9em;
-    color: #777;
+    color: var(--text-on-dark); /* Warna teks periode terang */
     margin-bottom: 10px;
 }
 
 .timeline-item ul {
-    list-style: none; /* Hilangkan bullet default */
+    list-style: none;
     padding-left: 0;
 }
 
@@ -242,7 +239,7 @@ body {
 
 .timeline-item ul li::before { /* Custom bullet point */
     content: '•';
-    color: var(--secondary-color);
+    color: var(--accent-color); /* Bullet point pakai accent-color */
     position: absolute;
     left: 0;
     font-size: 1.2em;
@@ -257,10 +254,11 @@ body {
 }
 
 .portfolio-item {
-    background-color: var(--background-color);
+    background-color: var(--light-card-color); /* Latar belakang kartu portofolio lebih gelap */
+    color: var(--text-on-dark); /* Teks di kartu portofolio terang */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--shadow-light);
+    box-shadow: var(--shadow-medium); /* Bayangan lebih tegas */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -278,14 +276,14 @@ body {
 
 .portfolio-item h3 {
     font-size: 1.3em;
-    color: var(--primary-color);
+    color: var(--text-on-dark); /* Judul item portofolio terang */
     margin: 15px 15px 5px;
 }
 
 .portfolio-item p {
     font-size: 0.95em;
     padding: 0 15px 15px;
-    color: #555;
+    color: var(--text-on-dark); /* Teks deskripsi portofolio terang */
 }
 
 .portfolio-item .btn {
@@ -300,6 +298,7 @@ body {
     text-align: center;
     margin-bottom: 30px;
     font-size: 1.1em;
+    color: var(--text-on-dark); /* Teks CV/Resume terang */
 }
 
 .cv .download-cv {
@@ -311,7 +310,7 @@ body {
 .cv h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.8em;
-    color: var(--primary-color);
+    color: var(--accent-color); /* Judul CV/Resume pakai accent-color */
     margin-bottom: 20px;
     text-align: center;
 }
@@ -324,7 +323,8 @@ body {
 }
 
 .cv ul li {
-    background-color: var(--light-background-color);
+    background-color: var(--light-card-color); /* Latar belakang item list CV lebih gelap */
+    color: var(--text-on-dark); /* Teks item list CV terang */
     padding: 15px 20px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -342,8 +342,8 @@ body {
 }
 
 .skill-tag {
-    background-color: var(--secondary-color);
-    color: var(--light-text-color);
+    background-color: var(--secondary-color); /* Background skill tag */
+    color: var(--text-on-dark); /* Teks skill tag terang */
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 0.9em;
@@ -352,9 +352,7 @@ body {
 }
 
 .skill-tag:hover {
-    /* darken() adalah fungsi SASS/LESS, bukan CSS murni.
-       Gunakan warna hex yang sedikit lebih gelap sebagai alternatif. */
-    background-color: #00aacc; /* Sedikit lebih gelap dari #00bcd4 */
+    background-color: #008899; /* Hover skill tag */
 }
 
 /* Contact Section */
@@ -372,22 +370,22 @@ body {
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    border: 2px solid var(--primary-color);
+    background-color: var(--accent-color); /* Background tombol kontak pakai accent-color */
+    color: var(--text-on-dark);
+    border: 2px solid var(--accent-color);
 }
 
 .contact-links a:hover {
     background-color: transparent;
-    color: var(--primary-color);
+    color: var(--accent-color);
     box-shadow: var(--shadow-light);
     transform: translateY(-3px);
 }
 
 /* Footer */
 footer {
-    background-color: #222;
-    color: var(--light-text-color);
+    background-color: var(--primary-color); /* Background footer menggunakan warna utama */
+    color: var(--text-on-dark);
     text-align: center;
     padding: 30px 20px;
     font-size: 0.9em;
@@ -413,7 +411,7 @@ footer {
     }
 
     .timeline::before {
-        left: 10px; /* Sesuaikan posisi garis timeline */
+        left: 10px;
     }
 
     .timeline-item {
@@ -422,19 +420,18 @@ footer {
     }
 
     .timeline-item::before {
-        left: -10px; /* Sesuaikan posisi lingkaran */
+        left: -10px;
         top: 25px;
     }
 
     .portfolio-grid {
-        grid-template-columns: 1fr; /* Satu kolom di layar kecil */
+        grid-template-columns: 1fr;
     }
 
-    /* Ini adalah bagian media query yang sebelumnya salah meletakkan aturan logo */
-    /* Untuk logo di layar kecil (<= 480px) */
+    /* Media query khusus untuk logo di layar sangat kecil */
     @media (max-width: 480px) {
         .company-logo {
-            width: 30px; /* Bisa lebih kecil lagi di layar sangat kecil */
+            width: 30px;
         }
     }
 }
